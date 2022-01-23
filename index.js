@@ -10,14 +10,14 @@ const puppeteer = require('puppeteer');
     const gamesToday = [];
     const feedEsports = document.querySelector('[data-testid="sport-feed-container"]');
     const champions = feedEsports.querySelectorAll('[data-testid="group-by-championship"]');
-    [...champions].forEach(element => {
+    [...champions].map(element => {
       // pega o nome do campeonato
       const champion = element.querySelector('div > span').innerHTML; 
       
       // pega todos os jogos de hoje
       const matchToday = [];
       const nodeList = element.querySelectorAll('div > a');
-      [...nodeList].forEach(element => {
+      [...nodeList].map(element => {
         // horario do jogo
         matchHour = element.querySelectorAll('[data-testid="event-card-header-wrapper"] > div > span');
         if([...matchHour].length === 0){
@@ -37,13 +37,14 @@ const puppeteer = require('puppeteer');
         // pega os jogos existentes por campeonato
         const matchPerChampion = []
         const match = element.querySelectorAll('div > div');
-        [...match].forEach((element) => {const nameScore = [];
+        [...match].map((element) => {
+            const nameScore = [];
             const name = element.querySelectorAll('span > span');
-            [...name].forEach((name) => {
+            [...name].map((name) => {
               nameScore.push(name.innerHTML);
             });
             const score = element.querySelectorAll('div > span[data-testid="score-line-score"]');
-            [...score].forEach((score) => {
+            [...score].map((score) => {
               nameScore.push(score.innerHTML);
             });
             matchPerChampion.push(nameScore);
