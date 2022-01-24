@@ -4,6 +4,7 @@ const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
   await page.goto('https://ge.globo.com/agenda/#/todos/');
+  // await page.click('[data-testid="show-more-text"]');
   await page.evaluate(() => {
     // executar toda funçao no navegador
     // pegar toda a seção com os jogos de hoje
@@ -11,6 +12,7 @@ const puppeteer = require('puppeteer');
     const feedEsports = document.querySelector('[data-testid="sport-feed-container"]');
     const champions = feedEsports.querySelectorAll('[data-testid="group-by-championship"]');
     [...champions].map(element => {
+
       // pega o nome do campeonato
       const champion = element.querySelector('div > span').innerHTML; 
       
@@ -35,7 +37,7 @@ const puppeteer = require('puppeteer');
         const hour = [...matchHour][0].innerText;
         
         // pega os jogos existentes por campeonato
-        const matchPerChampion = []
+        const matchPerChampion = [];
         const match = element.querySelectorAll('div > div');
         [...match].map((element) => {
             const nameScore = [];
@@ -47,7 +49,9 @@ const puppeteer = require('puppeteer');
             [...score].map((score) => {
               nameScore.push(score.innerHTML);
             });
-            matchPerChampion.push(nameScore);
+            if(nameScore.length > 1){
+              matchPerChampion.push(nameScore);
+            }
           }
         );
 
