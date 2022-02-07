@@ -59,10 +59,10 @@ app.get('/', async (request, response) => {
             const team_score = element.querySelectorAll('div > span[data-testid="score-line-score"]');
             if(team_score.length !== 0){
               team_score.forEach((score) => {
-                how_was_game.push({'name': name.innerHTML, 'score': score.innerHTML});
+                how_was_game.push({'team_name': name.innerHTML, 'team_score': score.innerHTML});
               });
             }else{
-              how_was_game.push({'name': name.innerHTML, 'score': '0'});
+              how_was_game.push({'team_name': name.innerHTML, 'team_score': 0});
             }
 
           });
