@@ -50,11 +50,15 @@ const puppeteer = require('puppeteer');
           const how_was_game = [];
           
           team_name.forEach((name) => {
-            
+
             const team_score = element.querySelectorAll('div > span[data-testid="score-line-score"]');
-            team_score.forEach((score) => {
-              how_was_game.push({'name': name.innerHTML, 'score': score.innerHTML});
-            });
+            if(team_score.length !== 0){
+              team_score.forEach((score) => {
+                how_was_game.push({'name': name.innerHTML, 'score': score.innerHTML});
+              });
+            }else{
+              how_was_game.push({'name': name.innerHTML, 'score': 0});
+            }
 
           });
 
@@ -63,7 +67,7 @@ const puppeteer = require('puppeteer');
           }
         }
         );
-        
+
         if(championship_games.length !== 0){
           games_today.push({championship_games, game_time});
         }

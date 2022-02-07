@@ -11,6 +11,7 @@ app.get('/', async (request, response) => {
 
   await page.setViewport({ width: 1366, height: 768});
   await page.goto('https://ge.globo.com/agenda/#/todos/');
+  // await page.goto('https://ge.globo.com/agenda/#/todos/06-02-2022');
   const soccerPlayToday = await page.evaluate(() => {
 
     const events_today = [];
@@ -54,11 +55,15 @@ app.get('/', async (request, response) => {
           const how_was_game = [];
           
           team_name.forEach((name) => {
-            
+
             const team_score = element.querySelectorAll('div > span[data-testid="score-line-score"]');
-            team_score.forEach((score) => {
-              how_was_game.push({'name': name.innerHTML, 'score': score.innerHTML});
-            });
+            if(team_score.length !== 0){
+              team_score.forEach((score) => {
+                how_was_game.push({'name': name.innerHTML, 'score': score.innerHTML});
+              });
+            }else{
+              how_was_game.push({'name': name.innerHTML, 'score': '0'});
+            }
 
           });
 
