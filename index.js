@@ -7,6 +7,7 @@ const puppeteer = require('puppeteer');
 
   await page.setViewport({ width: 1366, height: 768});
   await page.goto('https://ge.globo.com/agenda/#/todos/');
+  // await page.goto('https://ge.globo.com/agenda/#/todos/06-02-2022');
   await page.evaluate(() => {
 
     const events_today = [];
